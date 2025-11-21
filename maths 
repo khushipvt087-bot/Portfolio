@@ -1,1 +1,904 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyMuZ17y97+OgLC7kxYdiVTR"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":6,"metadata":{"id":"-8K05OvOzP8q","executionInfo":{"status":"ok","timestamp":1760329872620,"user_tz":-330,"elapsed":47,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}}},"outputs":[],"source":["import pandas as pd\n","import numpy as np\n","import seaborn as sns\n","import matplotlib.pyplot as plt\n","import statistics as st\n","from scipy import stats\n","import math as mt\n"]},{"cell_type":"code","source":["weights=[10,20,30,40,50,60,70,80]"],"metadata":{"id":"oPF5zzMz1jN-","executionInfo":{"status":"ok","timestamp":1760330073023,"user_tz":-330,"elapsed":8,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}}},"execution_count":8,"outputs":[]},{"cell_type":"code","source":["np.mean(weights)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"KxB4FRVz2Oh4","executionInfo":{"status":"ok","timestamp":1760330100915,"user_tz":-330,"elapsed":19,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"bffd5a17-23be-497f-fa70-fb671fef6bce"},"execution_count":9,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(45.0)"]},"metadata":{},"execution_count":9}]},{"cell_type":"code","source":["np.median(weights)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"aMp9vK5k2a9m","executionInfo":{"status":"ok","timestamp":1760330147469,"user_tz":-330,"elapsed":17,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"17e46f11-2084-4c7e-a1d7-76e5a1bc038d"},"execution_count":11,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(45.0)"]},"metadata":{},"execution_count":11}]},{"cell_type":"code","source":["np.sort(weights)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"M2dr7w2U2s_V","executionInfo":{"status":"ok","timestamp":1760330265885,"user_tz":-330,"elapsed":16,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"6a1b2774-fa50-4469-e7e9-72f4ce2878dd"},"execution_count":16,"outputs":[{"output_type":"execute_result","data":{"text/plain":["array([10, 20, 30, 40, 50, 60, 70, 80])"]},"metadata":{},"execution_count":16}]},{"cell_type":"code","source":["st.mode(weights)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"SMhJhnU128KN","executionInfo":{"status":"ok","timestamp":1760330315968,"user_tz":-330,"elapsed":64,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"f530285e-bdc6-4df5-cb4a-4328834d62f8"},"execution_count":18,"outputs":[{"output_type":"execute_result","data":{"text/plain":["10"]},"metadata":{},"execution_count":18}]},{"cell_type":"code","source":["weight_out=[10,20,30,40,50,60,70,80,1234]\n"],"metadata":{"id":"jy1b7N9r3PdG","executionInfo":{"status":"ok","timestamp":1760330421849,"user_tz":-330,"elapsed":40,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}}},"execution_count":19,"outputs":[]},{"cell_type":"code","source":["st.mean(weight_out)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"FTNk44uL3pT1","executionInfo":{"status":"ok","timestamp":1760330481723,"user_tz":-330,"elapsed":10,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"4084ec5c-f5c7-44eb-ce23-00e8c807d5ee"},"execution_count":21,"outputs":[{"output_type":"execute_result","data":{"text/plain":["177.11111111111111"]},"metadata":{},"execution_count":21}]},{"cell_type":"code","source":["st.median(weight_out)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"-ago_tnU337v","executionInfo":{"status":"ok","timestamp":1760330511975,"user_tz":-330,"elapsed":17,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"1a8cafbe-0a88-4dd7-fee2-b8172eb645eb"},"execution_count":23,"outputs":[{"output_type":"execute_result","data":{"text/plain":["50"]},"metadata":{},"execution_count":23}]},{"cell_type":"code","source":["st.mode(weight_out)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"vpvvLtkK3_Uc","executionInfo":{"status":"ok","timestamp":1760330571215,"user_tz":-330,"elapsed":18,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"cc7b149c-71e8-4b4b-8c57-ae28b0d6a09b"},"execution_count":26,"outputs":[{"output_type":"execute_result","data":{"text/plain":["10"]},"metadata":{},"execution_count":26}]},{"cell_type":"code","source":["df=sns.load_dataset('titanic')\n","print(df.head())"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"IjrxmkUI4Nx-","executionInfo":{"status":"ok","timestamp":1760330814571,"user_tz":-330,"elapsed":25,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"1aa333e9-d48a-472c-ac61-166b251d4c0a"},"execution_count":31,"outputs":[{"output_type":"stream","name":"stdout","text":["   survived  pclass     sex   age  sibsp  parch     fare embarked  class  \\\n","0         0       3    male  22.0      1      0   7.2500        S  Third   \n","1         1       1  female  38.0      1      0  71.2833        C  First   \n","2         1       3  female  26.0      0      0   7.9250        S  Third   \n","3         1       1  female  35.0      1      0  53.1000        S  First   \n","4         0       3    male  35.0      0      0   8.0500        S  Third   \n","\n","     who  adult_male deck  embark_town alive  alone  \n","0    man        True  NaN  Southampton    no  False  \n","1  woman       False    C    Cherbourg   yes  False  \n","2  woman       False  NaN  Southampton   yes   True  \n","3  woman       False    C  Southampton   yes  False  \n","4    man        True  NaN  Southampton    no   True  \n"]}]},{"cell_type":"code","source":["df['age']"],"metadata":{"colab":{"base_uri":"https://localhost:8080/","height":458},"id":"b5UdIFsY5JMZ","executionInfo":{"status":"ok","timestamp":1760330945649,"user_tz":-330,"elapsed":20,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"4e7f7d90-dd8c-415a-e537-50d99a6ca656"},"execution_count":33,"outputs":[{"output_type":"execute_result","data":{"text/plain":["0      22.0\n","1      38.0\n","2      26.0\n","3      35.0\n","4      35.0\n","       ... \n","886    27.0\n","887    19.0\n","888     NaN\n","889    26.0\n","890    32.0\n","Name: age, Length: 891, dtype: float64"],"text/html":["<div>\n","<style scoped>\n","    .dataframe tbody tr th:only-of-type {\n","        vertical-align: middle;\n","    }\n","\n","    .dataframe tbody tr th {\n","        vertical-align: top;\n","    }\n","\n","    .dataframe thead th {\n","        text-align: right;\n","    }\n","</style>\n","<table border=\"1\" class=\"dataframe\">\n","  <thead>\n","    <tr style=\"text-align: right;\">\n","      <th></th>\n","      <th>age</th>\n","    </tr>\n","  </thead>\n","  <tbody>\n","    <tr>\n","      <th>0</th>\n","      <td>22.0</td>\n","    </tr>\n","    <tr>\n","      <th>1</th>\n","      <td>38.0</td>\n","    </tr>\n","    <tr>\n","      <th>2</th>\n","      <td>26.0</td>\n","    </tr>\n","    <tr>\n","      <th>3</th>\n","      <td>35.0</td>\n","    </tr>\n","    <tr>\n","      <th>4</th>\n","      <td>35.0</td>\n","    </tr>\n","    <tr>\n","      <th>...</th>\n","      <td>...</td>\n","    </tr>\n","    <tr>\n","      <th>886</th>\n","      <td>27.0</td>\n","    </tr>\n","    <tr>\n","      <th>887</th>\n","      <td>19.0</td>\n","    </tr>\n","    <tr>\n","      <th>888</th>\n","      <td>NaN</td>\n","    </tr>\n","    <tr>\n","      <th>889</th>\n","      <td>26.0</td>\n","    </tr>\n","    <tr>\n","      <th>890</th>\n","      <td>32.0</td>\n","    </tr>\n","  </tbody>\n","</table>\n","<p>891 rows × 1 columns</p>\n","</div><br><label><b>dtype:</b> float64</label>"]},"metadata":{},"execution_count":33}]},{"cell_type":"code","source":["np.mean(df['age'])"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"4j6DnBaS5pMM","executionInfo":{"status":"ok","timestamp":1760331088239,"user_tz":-330,"elapsed":7,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"6bcd8bcc-4b73-4f4c-c4f9-c90b5c65c3f6"},"execution_count":38,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(29.69911764705882)"]},"metadata":{},"execution_count":38}]},{"cell_type":"code","source":["np.median(df['age'])"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"2thWiiKu6MAe","executionInfo":{"status":"ok","timestamp":1760331189403,"user_tz":-330,"elapsed":47,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"bdb0efaa-6d7a-497d-c388-29eb47413fb0"},"execution_count":41,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(nan)"]},"metadata":{},"execution_count":41}]},{"cell_type":"code","source":["st.mode(df['age'])"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"dKbqcMAo6ksr","executionInfo":{"status":"ok","timestamp":1760331254966,"user_tz":-330,"elapsed":51,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"0a65545a-3646-4b06-f96a-b2c6a6b8251b"},"execution_count":44,"outputs":[{"output_type":"execute_result","data":{"text/plain":["24.0"]},"metadata":{},"execution_count":44}]},{"cell_type":"code","source":["ages=df['age'].dropna(ignore_index=True)"],"metadata":{"id":"C0xHYzQK60tD","executionInfo":{"status":"ok","timestamp":1760331441069,"user_tz":-330,"elapsed":12,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}}},"execution_count":55,"outputs":[]},{"cell_type":"code","source":["ages"],"metadata":{"colab":{"base_uri":"https://localhost:8080/","height":458},"id":"swStHv7E7fbK","executionInfo":{"status":"ok","timestamp":1760331469600,"user_tz":-330,"elapsed":21,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"484398cd-c401-41c5-b314-d3a0d0233897"},"execution_count":58,"outputs":[{"output_type":"execute_result","data":{"text/plain":["0      22.0\n","1      38.0\n","2      26.0\n","3      35.0\n","4      35.0\n","       ... \n","709    39.0\n","710    27.0\n","711    19.0\n","712    26.0\n","713    32.0\n","Name: age, Length: 714, dtype: float64"],"text/html":["<div>\n","<style scoped>\n","    .dataframe tbody tr th:only-of-type {\n","        vertical-align: middle;\n","    }\n","\n","    .dataframe tbody tr th {\n","        vertical-align: top;\n","    }\n","\n","    .dataframe thead th {\n","        text-align: right;\n","    }\n","</style>\n","<table border=\"1\" class=\"dataframe\">\n","  <thead>\n","    <tr style=\"text-align: right;\">\n","      <th></th>\n","      <th>age</th>\n","    </tr>\n","  </thead>\n","  <tbody>\n","    <tr>\n","      <th>0</th>\n","      <td>22.0</td>\n","    </tr>\n","    <tr>\n","      <th>1</th>\n","      <td>38.0</td>\n","    </tr>\n","    <tr>\n","      <th>2</th>\n","      <td>26.0</td>\n","    </tr>\n","    <tr>\n","      <th>3</th>\n","      <td>35.0</td>\n","    </tr>\n","    <tr>\n","      <th>4</th>\n","      <td>35.0</td>\n","    </tr>\n","    <tr>\n","      <th>...</th>\n","      <td>...</td>\n","    </tr>\n","    <tr>\n","      <th>709</th>\n","      <td>39.0</td>\n","    </tr>\n","    <tr>\n","      <th>710</th>\n","      <td>27.0</td>\n","    </tr>\n","    <tr>\n","      <th>711</th>\n","      <td>19.0</td>\n","    </tr>\n","    <tr>\n","      <th>712</th>\n","      <td>26.0</td>\n","    </tr>\n","    <tr>\n","      <th>713</th>\n","      <td>32.0</td>\n","    </tr>\n","  </tbody>\n","</table>\n","<p>714 rows × 1 columns</p>\n","</div><br><label><b>dtype:</b> float64</label>"]},"metadata":{},"execution_count":58}]},{"cell_type":"code","source":["np.mean(ages)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"DJXHfBER7pHD","executionInfo":{"status":"ok","timestamp":1760331491297,"user_tz":-330,"elapsed":22,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"63dc5a4f-c310-4277-9cf5-0a7fb7627397"},"execution_count":60,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(29.69911764705882)"]},"metadata":{},"execution_count":60}]},{"cell_type":"code","source":["np.median(ages)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"iVds3b_H7uaS","executionInfo":{"status":"ok","timestamp":1760331508007,"user_tz":-330,"elapsed":17,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"8af97d60-6596-4753-8632-f7d392d6b6d7"},"execution_count":62,"outputs":[{"output_type":"execute_result","data":{"text/plain":["np.float64(28.0)"]},"metadata":{},"execution_count":62}]},{"cell_type":"code","source":["st.mode(ages)"],"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"BWWAg5aJ7yfa","executionInfo":{"status":"ok","timestamp":1760331556373,"user_tz":-330,"elapsed":53,"user":{"displayName":"Khushi Singh","userId":"03947506373567078180"}},"outputId":"eb657e69-b9d1-49ff-bac8-8cbfb3856152"},"execution_count":65,"outputs":[{"output_type":"execute_result","data":{"text/plain":["24.0"]},"metadata":{},"execution_count":65}]},{"cell_type":"code","source":["print(\"Mean(from statics)\")"],"metadata":{"id":"pjlQpc0R7-Si"},"execution_count":null,"outputs":[]}]}
+{
+"nbformat": 4,
+"nbformat_minor": 0,
+"metadata": {
+"colab": {
+"provenance": [],
+"authorship_tag": "ABX9TyMuZ17y97+OgLC7kxYdiVTR"
+},
+"kernelspec": {
+"name": "python3",
+"display_name": "Python 3"
+},
+"language_info": {
+"name": "python"
+}
+},
+"cells": [
+{
+"cell_type": "code",
+"execution_count": 6,
+"metadata": {
+"id": "-8K05OvOzP8q",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760329872620,
+"user_tz": -330,
+"elapsed": 47,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+}
+},
+"outputs": [],
+"source": [
+"import pandas as pd\n",
+"import numpy as np\n",
+"import seaborn as sns\n",
+"import matplotlib.pyplot as plt\n",
+"import statistics as st\n",
+"from scipy import stats\n",
+"import math as mt\n"
+]
+},
+{
+"cell_type": "code",
+"source": [
+"weights=[10,20,30,40,50,60,70,80]"
+],
+"metadata": {
+"id": "oPF5zzMz1jN-",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330073023,
+"user_tz": -330,
+"elapsed": 8,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+}
+},
+"execution_count": 8,
+"outputs": []
+},
+{
+"cell_type": "code",
+"source": [
+"np.mean(weights)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "KxB4FRVz2Oh4",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330100915,
+"user_tz": -330,
+"elapsed": 19,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "bffd5a17-23be-497f-fa70-fb671fef6bce"
+},
+"execution_count": 9,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(45.0)"
+]
+},
+"metadata": {},
+"execution_count": 9
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.median(weights)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "aMp9vK5k2a9m",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330147469,
+"user_tz": -330,
+"elapsed": 17,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "17e46f11-2084-4c7e-a1d7-76e5a1bc038d"
+},
+"execution_count": 11,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(45.0)"
+]
+},
+"metadata": {},
+"execution_count": 11
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.sort(weights)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "M2dr7w2U2s_V",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330265885,
+"user_tz": -330,
+"elapsed": 16,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "6a1b2774-fa50-4469-e7e9-72f4ce2878dd"
+},
+"execution_count": 16,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"array([10, 20, 30, 40, 50, 60, 70, 80])"
+]
+},
+"metadata": {},
+"execution_count": 16
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"st.mode(weights)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "SMhJhnU128KN",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330315968,
+"user_tz": -330,
+"elapsed": 64,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "f530285e-bdc6-4df5-cb4a-4328834d62f8"
+},
+"execution_count": 18,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"10"
+]
+},
+"metadata": {},
+"execution_count": 18
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"weight_out=[10,20,30,40,50,60,70,80,1234]\n"
+],
+"metadata": {
+"id": "jy1b7N9r3PdG",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330421849,
+"user_tz": -330,
+"elapsed": 40,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+}
+},
+"execution_count": 19,
+"outputs": []
+},
+{
+"cell_type": "code",
+"source": [
+"st.mean(weight_out)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "FTNk44uL3pT1",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330481723,
+"user_tz": -330,
+"elapsed": 10,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "4084ec5c-f5c7-44eb-ce23-00e8c807d5ee"
+},
+"execution_count": 21,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"177.11111111111111"
+]
+},
+"metadata": {},
+"execution_count": 21
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"st.median(weight_out)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "-ago_tnU337v",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330511975,
+"user_tz": -330,
+"elapsed": 17,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "1a8cafbe-0a88-4dd7-fee2-b8172eb645eb"
+},
+"execution_count": 23,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"50"
+]
+},
+"metadata": {},
+"execution_count": 23
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"st.mode(weight_out)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "vpvvLtkK3_Uc",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330571215,
+"user_tz": -330,
+"elapsed": 18,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "cc7b149c-71e8-4b4b-8c57-ae28b0d6a09b"
+},
+"execution_count": 26,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"10"
+]
+},
+"metadata": {},
+"execution_count": 26
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"df=sns.load_dataset('titanic')\n",
+"print(df.head())"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "IjrxmkUI4Nx-",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330814571,
+"user_tz": -330,
+"elapsed": 25,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "1aa333e9-d48a-472c-ac61-166b251d4c0a"
+},
+"execution_count": 31,
+"outputs": [
+{
+"output_type": "stream",
+"name": "stdout",
+"text": [
+"   survived  pclass     sex   age  sibsp  parch     fare embarked  class  \\\n",
+"0         0       3    male  22.0      1      0   7.2500        S  Third   \n",
+"1         1       1  female  38.0      1      0  71.2833        C  First   \n",
+"2         1       3  female  26.0      0      0   7.9250        S  Third   \n",
+"3         1       1  female  35.0      1      0  53.1000        S  First   \n",
+"4         0       3    male  35.0      0      0   8.0500        S  Third   \n",
+"\n",
+"     who  adult_male deck  embark_town alive  alone  \n",
+"0    man        True  NaN  Southampton    no  False  \n",
+"1  woman       False    C    Cherbourg   yes  False  \n",
+"2  woman       False  NaN  Southampton   yes   True  \n",
+"3  woman       False    C  Southampton   yes  False  \n",
+"4    man        True  NaN  Southampton    no   True  \n"
+]
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"df['age']"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/",
+"height": 458
+},
+"id": "b5UdIFsY5JMZ",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760330945649,
+"user_tz": -330,
+"elapsed": 20,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "4e7f7d90-dd8c-415a-e537-50d99a6ca656"
+},
+"execution_count": 33,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"0      22.0\n",
+"1      38.0\n",
+"2      26.0\n",
+"3      35.0\n",
+"4      35.0\n",
+"       ... \n",
+"886    27.0\n",
+"887    19.0\n",
+"888     NaN\n",
+"889    26.0\n",
+"890    32.0\n",
+"Name: age, Length: 891, dtype: float64"
+],
+"text/html": [
+"<div>\n",
+"<style scoped>\n",
+"    .dataframe tbody tr th:only-of-type {\n",
+"        vertical-align: middle;\n",
+"    }\n",
+"\n",
+"    .dataframe tbody tr th {\n",
+"        vertical-align: top;\n",
+"    }\n",
+"\n",
+"    .dataframe thead th {\n",
+"        text-align: right;\n",
+"    }\n",
+"</style>\n",
+"<table border=\"1\" class=\"dataframe\">\n",
+"  <thead>\n",
+"    <tr style=\"text-align: right;\">\n",
+"      <th></th>\n",
+"      <th>age</th>\n",
+"    </tr>\n",
+"  </thead>\n",
+"  <tbody>\n",
+"    <tr>\n",
+"      <th>0</th>\n",
+"      <td>22.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>1</th>\n",
+"      <td>38.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>2</th>\n",
+"      <td>26.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>3</th>\n",
+"      <td>35.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>4</th>\n",
+"      <td>35.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>...</th>\n",
+"      <td>...</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>886</th>\n",
+"      <td>27.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>887</th>\n",
+"      <td>19.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>888</th>\n",
+"      <td>NaN</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>889</th>\n",
+"      <td>26.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>890</th>\n",
+"      <td>32.0</td>\n",
+"    </tr>\n",
+"  </tbody>\n",
+"</table>\n",
+"<p>891 rows \u00d7 1 columns</p>\n",
+"</div><br><label><b>dtype:</b> float64</label>"
+]
+},
+"metadata": {},
+"execution_count": 33
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.mean(df['age'])"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "4j6DnBaS5pMM",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331088239,
+"user_tz": -330,
+"elapsed": 7,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "6bcd8bcc-4b73-4f4c-c4f9-c90b5c65c3f6"
+},
+"execution_count": 38,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(29.69911764705882)"
+]
+},
+"metadata": {},
+"execution_count": 38
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.median(df['age'])"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "2thWiiKu6MAe",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331189403,
+"user_tz": -330,
+"elapsed": 47,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "bdb0efaa-6d7a-497d-c388-29eb47413fb0"
+},
+"execution_count": 41,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(nan)"
+]
+},
+"metadata": {},
+"execution_count": 41
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"st.mode(df['age'])"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "dKbqcMAo6ksr",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331254966,
+"user_tz": -330,
+"elapsed": 51,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "0a65545a-3646-4b06-f96a-b2c6a6b8251b"
+},
+"execution_count": 44,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"24.0"
+]
+},
+"metadata": {},
+"execution_count": 44
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"ages=df['age'].dropna(ignore_index=True)"
+],
+"metadata": {
+"id": "C0xHYzQK60tD",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331441069,
+"user_tz": -330,
+"elapsed": 12,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+}
+},
+"execution_count": 55,
+"outputs": []
+},
+{
+"cell_type": "code",
+"source": [
+"ages"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/",
+"height": 458
+},
+"id": "swStHv7E7fbK",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331469600,
+"user_tz": -330,
+"elapsed": 21,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "484398cd-c401-41c5-b314-d3a0d0233897"
+},
+"execution_count": 58,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"0      22.0\n",
+"1      38.0\n",
+"2      26.0\n",
+"3      35.0\n",
+"4      35.0\n",
+"       ... \n",
+"709    39.0\n",
+"710    27.0\n",
+"711    19.0\n",
+"712    26.0\n",
+"713    32.0\n",
+"Name: age, Length: 714, dtype: float64"
+],
+"text/html": [
+"<div>\n",
+"<style scoped>\n",
+"    .dataframe tbody tr th:only-of-type {\n",
+"        vertical-align: middle;\n",
+"    }\n",
+"\n",
+"    .dataframe tbody tr th {\n",
+"        vertical-align: top;\n",
+"    }\n",
+"\n",
+"    .dataframe thead th {\n",
+"        text-align: right;\n",
+"    }\n",
+"</style>\n",
+"<table border=\"1\" class=\"dataframe\">\n",
+"  <thead>\n",
+"    <tr style=\"text-align: right;\">\n",
+"      <th></th>\n",
+"      <th>age</th>\n",
+"    </tr>\n",
+"  </thead>\n",
+"  <tbody>\n",
+"    <tr>\n",
+"      <th>0</th>\n",
+"      <td>22.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>1</th>\n",
+"      <td>38.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>2</th>\n",
+"      <td>26.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>3</th>\n",
+"      <td>35.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>4</th>\n",
+"      <td>35.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>...</th>\n",
+"      <td>...</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>709</th>\n",
+"      <td>39.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>710</th>\n",
+"      <td>27.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>711</th>\n",
+"      <td>19.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>712</th>\n",
+"      <td>26.0</td>\n",
+"    </tr>\n",
+"    <tr>\n",
+"      <th>713</th>\n",
+"      <td>32.0</td>\n",
+"    </tr>\n",
+"  </tbody>\n",
+"</table>\n",
+"<p>714 rows \u00d7 1 columns</p>\n",
+"</div><br><label><b>dtype:</b> float64</label>"
+]
+},
+"metadata": {},
+"execution_count": 58
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.mean(ages)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "DJXHfBER7pHD",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331491297,
+"user_tz": -330,
+"elapsed": 22,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "63dc5a4f-c310-4277-9cf5-0a7fb7627397"
+},
+"execution_count": 60,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(29.69911764705882)"
+]
+},
+"metadata": {},
+"execution_count": 60
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"np.median(ages)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "iVds3b_H7uaS",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331508007,
+"user_tz": -330,
+"elapsed": 17,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "8af97d60-6596-4753-8632-f7d392d6b6d7"
+},
+"execution_count": 62,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"np.float64(28.0)"
+]
+},
+"metadata": {},
+"execution_count": 62
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"st.mode(ages)"
+],
+"metadata": {
+"colab": {
+"base_uri": "https://localhost:8080/"
+},
+"id": "BWWAg5aJ7yfa",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331556373,
+"user_tz": -330,
+"elapsed": 53,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+},
+"outputId": "eb657e69-b9d1-49ff-bac8-8cbfb3856152"
+},
+"execution_count": 65,
+"outputs": [
+{
+"output_type": "execute_result",
+"data": {
+"text/plain": [
+"24.0"
+]
+},
+"metadata": {},
+"execution_count": 65
+}
+]
+},
+{
+"cell_type": "code",
+"source": [
+"print(\"Mean(from statistics)\")\n",
+"print(st.mean(ages))\n",
+"print(\"\\nMedian(from statistics)\")\n",
+"print(st.median(ages))\n",
+"print(\"\\nMode(from statistics)\")\n",
+"print(st.mode(ages))"
+],
+"metadata": {
+"id": "pjlQpc0R7-Si",
+"executionInfo": {
+"status": "ok",
+"timestamp": 1760331600000,
+"user_tz": -330,
+"elapsed": 25,
+"user": {
+"displayName": "Khushi Singh",
+"userId": "03947506373567078180"
+}
+}
+},
+"execution_count": 66,
+"outputs": [
+{
+"output_type": "stream",
+"name": "stdout",
+"text": [
+"Mean(from statistics)\n",
+"29.69911764705882\n",
+"\n",
+"Median(from statistics)\n",
+"28.0\n",
+"\n",
+"Mode(from statistics)\n",
+"24.0\n"
+]
+}
+]
+}
+]
+}
